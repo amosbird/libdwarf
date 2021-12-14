@@ -43,8 +43,8 @@ set_source_group(HEADERS "Header Files"
   print_reloc.h print_reloc_decls.h section_bitmaps.h uri.h)
 
 set_source_group(CONFIGURATION_FILES "Configuration Files"
-  ${CMAKE_SOURCE_DIR}/config.h.in.cmake
-  ${CMAKE_BINARY_DIR}/config.h)
+  ${PROJECT_SOURCE_DIR}/config.h.in.cmake
+  ${PROJECT_BINARY_DIR}/config.h)
 	
 add_executable(dwarfdump ${SOURCES} ${HEADERS} ${CONFIGURATION_FILES})
 
@@ -100,9 +100,9 @@ if (DO_TESTING)
     add_executable(selfmakename ${MAKENAME_SOURCES})
     target_compile_options(selfmakename PRIVATE ${DW_FWALL})
     target_compile_options(selfmakename PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfmakename PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfmakename COMMAND selfmakename)
 endif()
 
@@ -113,11 +113,11 @@ if (DO_TESTING)
     add_executable(selfhelpertree ${HELPERTREE_SOURCES})
     target_compile_options(selfhelpertree PRIVATE ${DW_FWALL})
     target_compile_options(selfhelpertree PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/dwarfdump")
+        "-I${PROJECT_SOURCE_DIR}/dwarfdump")
     target_compile_options(selfhelpertree PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfhelpertree PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfhelpertree COMMAND selfhelpertree)
 endif()
 
@@ -128,9 +128,9 @@ if (DO_TESTING)
     target_compile_options(selfmc PRIVATE ${SELFTEST} )
     target_compile_options(selfmc PRIVATE ${DW_FWALL})
     target_compile_options(selfmc PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfmc PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfmc COMMAND selfmc)
 endif()
 
@@ -141,9 +141,9 @@ if (DO_TESTING)
     target_compile_options(selfesb PRIVATE ${SELFTEST} )
     target_compile_options(selfesb PRIVATE ${DW_FWALL})
     target_compile_options(selfmakename PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfmakename PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfesb COMMAND selfesb)
 endif()
 
@@ -155,9 +155,9 @@ if (DO_TESTING)
         ${SELFTEST} )
     target_compile_options(selfsectionbitmaps PRIVATE ${DW_FWALL})
     target_compile_options(selfsectionbitmaps PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfsectionbitmaps PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfsectionbitmaps COMMAND selfsectionbitmaps)
 endif()
 
@@ -169,22 +169,22 @@ if (DO_TESTING)
     target_compile_options(selfprintreloc PRIVATE ${SELFTEST} )
     target_compile_options(selfprintreloc PRIVATE ${DW_FWALL})
     target_compile_options(selfprintreloc PRIVATE 
-        "-I${CMAKE_SOURCE_DIR}/libdwarf")
+        "-I${PROJECT_SOURCE_DIR}/libdwarf")
     target_compile_options(selfprintreloc PRIVATE 
-        "-I${CMAKE_BINARY_DIR}/libdwarf")
+        "-I${PROJECT_BINARY_DIR}/libdwarf")
     add_test(NAME selfprintreloc COMMAND selfprintreloc)
 endif()
 if (DO_TESTING) 
-    set(peobj "${CMAKE_SOURCE_DIR}/dwarfdump/testobjLE32PE.exe") 
-    set(pebase "${CMAKE_SOURCE_DIR}/dwarfdump/testobjLE32PE.base") 
-    set(execpedd "${CMAKE_BINARY_DIR}/dwarfdump/dwarfdump")
+    set(peobj "${PROJECT_SOURCE_DIR}/dwarfdump/testobjLE32PE.exe") 
+    set(pebase "${PROJECT_SOURCE_DIR}/dwarfdump/testobjLE32PE.base") 
+    set(execpedd "${PROJECT_BINARY_DIR}/dwarfdump/dwarfdump")
     add_test(NAME selfdwarfdumppe COMMAND sh -c "${execpedd} -vvv -a ${peobj} |  head -700 | sed 's/last time 0x.*/last time 0x0/' >junk.testoutpe ; diff ${pebase} junk.testoutpe" )
 endif()
 
 if (DO_TESTING) 
-    set(elfobj "${CMAKE_SOURCE_DIR}/dwarfdump/testuriLE64ELf.obj") 
-    set(elfbase "${CMAKE_SOURCE_DIR}/dwarfdump/testuriLE64ELf.base")
-    set(execelfdd "${CMAKE_BINARY_DIR}/dwarfdump/dwarfdump")
+    set(elfobj "${PROJECT_SOURCE_DIR}/dwarfdump/testuriLE64ELf.obj") 
+    set(elfbase "${PROJECT_SOURCE_DIR}/dwarfdump/testuriLE64ELf.base")
+    set(execelfdd "${PROJECT_BINARY_DIR}/dwarfdump/dwarfdump")
     add_test(NAME selfdwarfdumpelf COMMAND sh -c "${execelfdd} -vvv -a ${elfobj} | head -700 > junk.testoutelf ; diff ${elfbase} junk.testoutelf" )
 endif()
 

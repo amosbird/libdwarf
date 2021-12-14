@@ -79,8 +79,8 @@ pro_reloc.h pro_reloc_stream.h pro_reloc_symbolic.h
 pro_section.h pro_types.h pro_util.h)
 
 set_source_group(CONFIGURATION_FILES "Configuration Files" 
-    ${CMAKE_SOURCE_DIR}/config.h.in.cmake 
-    ${CMAKE_BINARY_DIR}/config.h)
+    ${PROJECT_SOURCE_DIR}/config.h.in.cmake 
+    ${PROJECT_BINARY_DIR}/config.h)
 
 
 	
